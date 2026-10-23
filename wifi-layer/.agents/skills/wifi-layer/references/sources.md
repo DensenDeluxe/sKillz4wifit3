@@ -93,8 +93,10 @@ not an IEEE definition of the following MPDU's semantics.
 
 [Linux v6.18 ieee80211.h](https://github.com/torvalds/linux/blob/v6.18/include/linux/ieee80211.h),
 checked using the corresponding raw tagged source. DS roles, header/QoS helpers,
-`WLAN_AKM_SUITE_*`, and `WLAN_CIPHER_SUITE_*`. Pinned implementation evidence;
-neither an exhaustive future registry nor Wi-Fi Alliance certification rules.
+`WLAN_AKM_SUITE_*`, and `WLAN_CIPHER_SUITE_*`. Pinned implementation evidence
+through selector 20 (decimal). Selectors 21–25 are not in this header; see
+[S-HOSTAP-AKM](#s-hostap-akm). Neither an exhaustive future registry nor Wi-Fi
+Alliance certification rules.
 
 ### S-RX
 
@@ -114,6 +116,26 @@ not permission to operate a given transmitter in a given jurisdiction.
 [hostap EAPOL definitions](https://w1.fi/wpa_supplicant/devel/eapol__common_8h_source.html).
 Public historical Doxygen documentation, version 2.5. Packet-type enumeration
 supports the dispatch distinction; it is not the latest complete 802.1X registry.
+
+### S-HOSTAP-AKM
+
+Hostap `RSN_AUTH_KEY_MGMT_*` in `src/common/wpa_common.h`, read 2026-10-23 from
+the ChromiumOS hostap mirror at
+`09a540582dfebf5c376b9558fef2b672ae41b6f0`
+([wpa_common.h](https://chromium.googlesource.com/chromiumos/third_party/hostap/+/09a540582dfebf5c376b9558fef2b672ae41b6f0/src/common/wpa_common.h)).
+Implementation names for selectors 21–25: PASN, FT-802.1X SHA-384 unrestricted,
+802.1X SHA-384, SAE-EXT-KEY, FT-SAE-EXT-KEY. This is not the Linux v6.18 header,
+which stops at selector 20, and it is not a Wi-Fi Alliance profile.
+
+### S-WPA3
+
+[WPA3 Specification v3.5](https://www.wi-fi.org/system/files/WPA3%20Specification%20v3.5.pdf),
+Wi-Fi Alliance, 2025. Sections 1.4, 2.2, and 4.2.1 group `00-0F-AC:8` with `:24`
+(SAE, the latter using a group-dependent hash) and `00-0F-AC:9` with `:25`
+(FT with SAE). In that document the number after the colon is decimal, so
+`:24` is the same selector as `00-0F-AC-18` in the skill's hex tables.
+A profile requirement still needs the exact edition when a conformance
+rule is being hardcoded; this entry only supports those four selectors' family.
 
 ### S-HOSTAP
 

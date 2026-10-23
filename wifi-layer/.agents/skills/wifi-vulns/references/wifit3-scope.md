@@ -1,5 +1,8 @@
 # Worldwide Wi-Fi and wifit3 scope
 
+Apply the depth table in `../SKILL.md` before this list. The list is the
+universe for a broad review, not a quota for a named CVE or product.
+
 Include a finding when Wi-Fi is part of the vulnerability or its observable
 security state and wifit3 could plausibly capture, parse, correlate, fingerprint,
 detect, report, or support offline analysis of the evidence.
@@ -81,16 +84,18 @@ gaps and relevant areas without editing code or claiming support.
 
 ## Protocol evidence invariants
 
+Parser and evidence rules live in the wifi-layer skill
+(`references/capture-and-state.md`, `references/rsn-and-pmf.md`,
+`references/enterprise-and-keys.md`), including the project suite sets
+(`SAE_AKM_SUITES` includes decimal 24 and 25; `ENTERPRISE_AKM_SUITES` includes
+22 and 23; `PSK_CAPTURE_AKMS` is only 2, 4, and 6). When that skill is not
+installed, keep these boundaries anyway:
+
 - Raw MPDU, Radiotap, Ethernet, USB transfer data, firmware descriptors, padding,
   and FCS are different evidence envelopes.
-- Preserve exact wireless address roles, direction, per-device reception,
-  channel, AP/session provenance, replay counters, nonces, and generation.
-- Missing, truncated, invalid, unknown, and explicitly absent are distinct.
-- Preserve complete suite selectors, unknown values, list contents, and validity.
-- Separate AP advertisement, client selection, negotiated state, observed
-  traffic, cryptographic verification, vulnerability confirmation, and impact.
-- PMF capable, required, negotiated, observed protected traffic, and verified
-  protection are separate facts.
-- Dispatch EAP-Packet and EAPOL-Key independently. An outer TLS method does not
-  reveal the inner method, credentials, or certificate-validation policy.
-- Handshake observation alone does not prove MIC verification or crackability.
+- Preserve complete suite selectors. Decimal 22 is not 00-0F-AC-0D, and decimal
+  24 stays in the SAE family.
+- Separate AP advertisement, client selection, observed traffic, cryptographic
+  verification, vulnerability confirmation, and impact.
+- An outer TLS method does not reveal the inner method or certificate policy.
+- A handshake observation is not a MIC verification or a passphrase-capture claim.

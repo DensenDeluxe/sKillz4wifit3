@@ -1,8 +1,8 @@
 # Scientific audit evidence
 
-Use this reference to research or document how an authorized Wi-Fi audit should
-be made reproducible. Do not conduct the experiment while using this research-
-only skill.
+Use this reference to document an audit the user already scoped. Do not conduct
+the experiment, invent a lab run, or fill hardware and capture fields that were
+not observed. This skill stays research-only.
 
 ## Audit record
 
