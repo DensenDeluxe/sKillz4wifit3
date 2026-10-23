@@ -1,19 +1,19 @@
-# wifi-layer installieren
+# Install wifi-layer
 
-Ein gemeinsamer WLAN-Skill mit drei Einstiegspunkten. Er unterstützt Protokollreviews und Änderungen an 802.11, RSN, WPA2/WPA3-Enterprise, EAP/EAPOL, PMF und der Capture-Verarbeitung.
+One shared WLAN skill with three entry points. It supports protocol reviews and changes involving 802.11, RSN, WPA2/WPA3-Enterprise, EAP/EAPOL, PMF, and capture processing.
 
-## Mini-Installation
+## Quick install
 
-1. Dieses Repository klonen oder als ZIP herunterladen.
-2. Die drei Ordner `.agents`, `.claude` und `.cursor` aus diesem Verzeichnis in das Stammverzeichnis deines **wifit3-Checkouts** kopieren und mit vorhandenen Ordnern zusammenführen.
-3. Eine neue Agent-Sitzung im wifit3-Projekt starten und den Skill in der Skill-Liste prüfen.
+1. Clone this repository or download it as a ZIP.
+2. Copy the `.agents`, `.claude`, and `.cursor` directories from this directory into the root of your **wifit3 checkout**, merging them with any existing directories.
+3. Start a new agent session in the wifit3 project and check that the skill appears in the skill list.
 
-PowerShell-Variante; den Projektpfad anpassen:
+PowerShell alternative; adjust the project path:
 
 ```powershell
 git clone https://github.com/DensenDeluxe/sKillz4wifit3.git
 $bundle = (Resolve-Path './sKillz4wifit3/wifi-layer').Path
-$project = (Resolve-Path 'C:/Pfad/zu/wifit3').Path
+$project = (Resolve-Path 'C:/path/to/wifit3').Path
 foreach ($agent in @('.agents', '.claude', '.cursor')) {
     $destination = Join-Path $project "$agent/skills"
     New-Item -ItemType Directory -Force -Path $destination | Out-Null
@@ -21,18 +21,18 @@ foreach ($agent in @('.agents', '.claude', '.cursor')) {
 }
 ```
 
-Die Kopierbefehle installieren beziehungsweise aktualisieren nur den Ordner `wifi-layer`; andere Skills bleiben erhalten. Für Claude Code und Cursor muss der gemeinsame Ordner `.agents/skills/wifi-layer` ebenfalls mitkopiert werden.
+The copy commands install or update only the `wifi-layer` directory, preserving other skills. Claude Code and Cursor also need the shared `.agents/skills/wifi-layer` directory.
 
-## Einstiegspunkte
+## Entry points
 
-| Assistent | Projektpfad | Inhalt |
+| Agent | Project path | Contents |
 | --- | --- | --- |
-| Codex | `.agents/skills/wifi-layer/SKILL.md` | Vollständiger Workflow und fünf Fachreferenzen |
-| Claude Code | `.claude/skills/wifi-layer/SKILL.md` | Verweis auf den gemeinsamen Workflow |
-| Cursor | `.cursor/skills/wifi-layer/SKILL.md` | Verweis auf den gemeinsamen Workflow |
+| Codex | `.agents/skills/wifi-layer/SKILL.md` | Complete workflow and five technical references |
+| Claude Code | `.claude/skills/wifi-layer/SKILL.md` | Links to the shared workflow |
+| Cursor | `.cursor/skills/wifi-layer/SKILL.md` | Links to the shared workflow |
 
-Beispielauftrag: „Nutze den Skill wifi-layer und reviewe die Enterprise-AKM- und PMF-Behandlung dieses Branches.“
+Example prompt: "Use the wifi-layer skill to review this branch's Enterprise AKM and PMF handling."
 
-Die fünf Referenzen behandeln Capture und Zustand, Enterprise/EAP und Schlüssel, RSN und PMF, Validierung sowie Quellen. Hardware- und Funkversuche benötigen weiterhin den dafür vorgesehenen Projektablauf.
+The five references cover capture and state, Enterprise/EAP and keys, RSN and PMF, validation, and sources. Hardware and on-air tests still require the project's established procedures.
 
-Die Installationspfade sind in der offiziellen Dokumentation beschrieben: [Codex](https://learn.chatgpt.com/docs/build-skills), [Claude Code](https://code.claude.com/docs/en/skills) und [Cursor](https://cursor.com/docs/skills).
+The installation paths are documented in the official guides for [Codex](https://learn.chatgpt.com/docs/build-skills), [Claude Code](https://code.claude.com/docs/en/skills), and [Cursor](https://cursor.com/docs/skills).
