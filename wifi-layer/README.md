@@ -2,8 +2,8 @@
 
 This bundle contains two shared skills with entry points for Codex, Claude Code, and Cursor:
 
-- `wifi-layer` supports protocol reviews and changes involving 802.11, RSN, WPA2/WPA3-Enterprise, EAP/EAPOL, PMF, and capture processing.
-- `wifi-vulns` performs research-only collection and validation of fresh CVEs, historical attack classes, patch evidence, public PoC evidence, and scientific audit provenance.
+- `wifi-layer` supports protocol reviews and changes involving 802.11, RSN, WPA2/WPA3-Enterprise, EAP/EAPOL, PMF, capture processing, and security claims shown or gated by the UI and campaigns.
+- `wifi-vulns` performs research-only collection and validation of fresh CVEs, historical attack classes, patch evidence, public PoC evidence, and scientific audit provenance. A named subject is one dossier; a worldwide multi-window survey runs only for a broad review.
 
 ## Quick install
 
