@@ -4,7 +4,7 @@ Research-backed agent skills for code review and development in [wifit3](https:/
 
 | Skill | Focus | Agents | Installation |
 | --- | --- | --- | --- |
-| [wifi-layer](wifi-layer/.agents/skills/wifi-layer/SKILL.md) | 802.11, RSN, WPA2/WPA3-Enterprise, EAP/EAPOL, PMF, and capture analysis | Codex, Claude Code, Cursor | [Quick install](wifi-layer/README.md) |
+| [wifi-layer](wifi-layer/.agents/skills/wifi-layer/SKILL.md) | 802.11, RSN, WPA2/WPA3-Enterprise, EAP/EAPOL, PMF, capture analysis, and security claims in the UI or campaigns | Codex, Claude Code, Cursor | [Quick install](wifi-layer/README.md) |
 | [wifi-vulns](wifi-layer/.agents/skills/wifi-vulns/SKILL.md) | Fresh Wi-Fi CVEs, historical vulnerability classes, patch evidence, PoC analysis, and scientific audit provenance | Codex, Claude Code, Cursor | [Quick install](wifi-layer/README.md) |
 
 The bundle provides separate entry points for each agent and one shared reference set per skill.

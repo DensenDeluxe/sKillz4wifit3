@@ -14,6 +14,7 @@ to an unrelated patch. Stable rule IDs are defined in the other references.
 | EAP and EAPOL routing | `tests/wlan/test_eapol.py` |
 | Handshake/crypto | `tests/wlan/test_sink.py`, `tests/dot11/test_wpa.py` |
 | PMF | `tests/dot11/test_pmf.py` |
+| Security labels and campaign gates | `tests/ui/test_encryption_format.py`, `tests/ui/test_focus_model.py`, `tests/campaigns/test_deauth.py`, `tests/campaigns/test_pmkid_harvest.py`, `tests/campaigns/test_eviltwin_campaign.py` |
 | AP/client state and warnings | `tests/wlan/test_sink.py`, `tests/models/test_security_warnings.py` |
 | Multiple devices | `tests/wlan/test_dedupe.py`, `tests/wlan/test_array.py` |
 | Channel lifecycle | `tests/wlan/test_channels.py`, `tests/wlan/test_lease.py`, `tests/wlan/test_replug.py` |
@@ -39,6 +40,11 @@ agent decisions. Do not run formatting or hardware scripts for these edits.
 | Enterprise mixed offer and different valid client selection | No retroactive AP/session conflation | WPA-001/002 |
 | SHA-256 Enterprise AKM with incomplete PMF/cipher/profile evidence | No claim of a verified successful WPA3 session | WPA-002 |
 | Suite-B-192 beacon without EAP/TLS evidence | Advertised candidate, no full end-to-end compliance claim | WPA-003 |
+| SAE-EXT-KEY (decimal 24) and FT-SAE-EXT-KEY (25) beside SAE 8/9 | Stay in `SAE_AKM_SUITES`; absence from the Linux v6.18 table does not drop them | RSN-002, WPA-002 |
+| Decimal 22 and 23 | Stay in `ENTERPRISE_AKM_SUITES`; not relabeled as 00-0F-AC-0C or 00-0F-AC-0D | RSN-002 |
+| UI label or campaign visibility for OWE, SAE-EXT, or PSK SHA-384 | Shared AKM sets; no local `{2, 4, 6}`; no passphrase-capture claim | WPA-002, KEY-005 |
+| PMKID harvest versus PSK capture | Harvestable set stays AKM 2 unless that campaign's negotiated AKM changes | KEY-005 |
+| PMF required or invalid | Deauth gate uses `classify_pmf` / `deauth_attack_allowed`; a hidden transmission is not a disconnection | PMF-001/002 |
 | MFPC/MFPR observations, successful association, protected traffic, invalid MIC | Keep each PMF evidence claim independent | PMF-001/002 |
 
 Use the `WIFI-` prefix for the abbreviated IDs in these tables.
@@ -106,6 +112,16 @@ they are not a completed bug audit or authorization to change product behavior.
 - `eapol.py` declares `MIC_LEN = 16`; parser EAPOL-Key fields also use fixed
   ordinary-layout offsets. This is a support boundary to inspect before
   claiming Suite-B-192 key-frame support, even when its beacon is recognized.
+- `SAE_AKM_SUITES` is `{8, 9, 24, 25}` and `ENTERPRISE_AKM_SUITES` includes
+  22 and 23. The Linux v6.18 subset in the RSN reference stops at decimal 20.
+  Do not delete the later suites to match that header.
+- `PSK_CAPTURE_AKMS` in `src/wifit3/crack/handshake.py` is `{2, 4, 6}`.
+  `ui/encryption_format.py` and `campaigns/deauth.py` import it. The PMKID
+  campaign's harvestable set is `{2}` only. OWE (18), SAE including 24 and 25,
+  Enterprise, and PSK SHA-384 (19, 20) are outside the capture set.
+- PMF text in `ui/focus_model.py` uses `classify_pmf`. Whether deauth
+  transmission is allowed is `deauth_attack_allowed` in
+  `models/access_point.py`. Do not re-derive MFPC/MFPR in a screen.
 - `StreamMerger.key` uses FC plus bytes `[4:24]`; it is not keyed only on a
   sequence number, and it does not include QoS TID. Test a demonstrated collision
   before changing cross-device dedupe behavior.

@@ -4,19 +4,27 @@ Use this protocol for broad searches, fresh-CVE monitoring, vendor surveys, and
 historical reviews. PRISMA 2020 is a transparency framework for reporting search
 and selection; it is not a vulnerability quality score.
 
+Match depth to the request before searching. The depth table in
+`../SKILL.md` decides whether this is one dossier, a 90-day watchlist, or a
+three-window survey. The windows and the worldwide coverage list below apply
+to a broad review. A named CVE, product, or attack family does not inherit them.
+
 ## Define the research frame
 
 Record these values before searching:
 
 - execution-date cutoff and UTC retrieval time;
-- research question and wifit3 relevance rule;
-- 90-day hot window, 24-month current window, and historical baseline;
-- included protocol, component, platform, product, and geographic categories;
+- research question, the depth row that applies, and the wifit3 relevance rule;
+- for a broad review: the 90-day hot window, the 24-month window, and the
+  historical baseline, plus the protocol, product, and geographic categories
+  actually searched;
 - explicit exclusions and why they are outside the wireless scope;
 - synonyms, former product names, project forks, acquisitions, and CVE aliases.
 
-Do not block on an unspecified category. Use worldwide coverage and the full
-wifit3 relevance rule from [wifit3 scope](wifit3-scope.md).
+On a broad review, do not block on an unspecified category. Use worldwide
+coverage and the wifit3 relevance rule from [wifit3 scope](wifit3-scope.md).
+On a named subject, search that subject and its aliases; do not walk the
+coverage list.
 
 ## Search in layers
 
